@@ -2,8 +2,18 @@ import streamlit as st
 import pandas as pd
 import pickle
 import requests
+import os
+import gdown
 
 API_KEY = "b15cd75df9b36428294e47fe0ca8dcd1"
+
+# Download similarity.pkl from Google Drive if not present
+if not os.path.exists('similarity.pkl'):
+    with st.spinner("⏳ Loading model... please wait"):
+        gdown.download(
+            "https://drive.google.com/uc?id=1e41D2QPaWbetCMCW6LBKkJTXqW9H4ZHs",
+            'similarity.pkl', quiet=False
+        )
 
 # Fetch poster + rating safely
 def fetch_movie(movie_id):
